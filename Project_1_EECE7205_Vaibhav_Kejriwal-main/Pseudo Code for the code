@@ -1,0 +1,96 @@
+#Pseudo code for the algorithm:
+
+```
+Function cases(arr, n, m):
+    if n < m:
+        return 0
+    if dp[n][m] is not 0:
+        return dp[n][m]
+
+    ans = Intmax
+    ans2 = 0
+    for i from n-1 to m-1:
+        ans = min(cases(arr, i, m-1), sum[n] - sum[i])
+        if ans2 < ans:
+            ans2 = ans
+    return ans2
+
+max_min_grouping(arr, n, m):
+    ans = cases(arr, n, m)
+    print "After maximizing the minimum sum of groups, you will get ", ans
+
+    cm = 0
+    index = 0
+    j = 1
+    b = new int[n+1]
+    for i from 1 to n:
+        if j == m:
+            b[j] = n - i + 1
+            break
+        cm += arr[i]
+        index++
+        if cm >= ans:
+            b[j] = index
+            cm = 0
+            index = 0
+            j++
+    return b
+
+function main():
+    input n, m
+    arr = new int[n+1]
+    input elements into arr
+    
+    for i from 0 to n:
+        sum[i] = 0
+    for i from 1 to n:
+        sum[i] += sum[i-1] + arr[i]
+        
+    for i from 1 to n:
+        dp[i][1] = sum[i]
+        
+    b = max_min_grouping(arr, n, m)
+    print "Groups and their size from starting is "
+    for i from 1 to m:
+        print b[i]
+    print endl
+    
+    print "Grouping of array: "
+    start = 1
+    for i from 0 to m:
+        end = b[i] + start - 1
+        for j from start to end:
+            print arr[j]
+        print "|"
+        start = end + 1
+    
+    if start < n:
+        for i from start to n:
+            print arr[i]
+    print endl
+```
+
+Pseudocode for the max_min_grouping function:
+
+```
+function max_min_grouping(arr, n, m):
+  // Base case
+  if n < m:
+    return 0
+
+  // Look up
+  if dp[n][m] != 0:
+    return dp[n][m]
+
+  // Recursive case
+  ans = Intmax
+  ans2 = 0
+  for i in range(n - 1, m - 1, -1):
+    ans = min(ans, fun(arr, i, m - 1), sum[n] - sum[i])
+    if ans2 < ans:
+      ans2 = ans
+
+  // Store the result in the lookup table
+  dp[n][m] = ans2
+
+  return ans2

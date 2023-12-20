@@ -1,0 +1,12 @@
+ Analysis of running time asymptotically:
+
+The time complexity of the “cases" function is O(n^2), as there is a nested loop from n-1 to m-1,
+and each iteration takes O(n) time.
+
+The time complexity of the "max_min_grouping" function is O(n), as there is a single loop from 1 to n.
+
+As n tends to infinity, the time complexity of the max_min_grouping function becomes O(n^2).
+
+The main function has a time complexity of O(n), as it has a loop from 1 to n.
+
+Therefore, the overall time complexity of the algorithm is O(n^2).
